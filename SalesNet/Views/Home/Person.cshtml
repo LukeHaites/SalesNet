@@ -1,0 +1,49 @@
+﻿@model SalesNet.Models.Person
+
+@{
+    ViewBag.Title = "Person";
+
+    System.Xml.Linq.XDocument doc = System.Xml.Linq.XDocument.Load(ViewBag.url);
+    var idnum = doc.Element("Id").Value;
+}
+
+<h2>Person</h2>
+
+@ViewBag.persondata
+
+<table>
+    <tr>
+        <th>
+            id
+        </th>
+        <th>
+            FirstName
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Is Agent ?
+        </th>
+        <th>
+            Sex
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.isagent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.sex)
+        </td>
+    </tr>
+</table>

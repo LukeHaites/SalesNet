@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="@Url.Content("~/content/images/logo.png")" alt="Logo" />
+        </div>
+        <div id="user">
+            <ul id="account">
+                <li>Welcome Joe</li>
+                <li>Edit Account</li>
+                <li>Log out</li>
+                <li>Change Customer</li>
+            </ul>
+            <div id="customer">
+                Customer: <span id="customerbtn">@Html.ActionLink("General Pants","PickCustomer")</span>
+            </div>
+        </div>
+    </header>
+    <p style="clear:both"></p>
+    <nav id="topnavbar">
+        <ul id="navmenu">
+            <li>Order History</li>
+            <li>Stock Order</li>
+            <li>Indent Order</li>
+        </ul>
+    </nav>
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

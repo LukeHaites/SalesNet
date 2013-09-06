@@ -1,0 +1,148 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    
+    background-color: #fff;
+    background-image: url('images/background_page.png');
+    background-repeat: repeat-x;
+
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* Styles for header
+-----------------------------------------------------------*/
+#logo {
+    float: left;
+    padding-top: 25px;
+}
+
+#user {
+    float: right;
+}
+
+ul#account {
+    list-style: none;
+    font-size: 120%;
+    margin: 0;
+}
+    ul#account li {
+        display: inline;
+        padding-right: 10px;
+        padding-left: 5px;
+        border-right: solid;
+        border-right-width: thin;
+    }
+        ul#account li:last-child {
+            border-right: none;
+        }
+
+#customer {
+    font-size: 140%;
+    font-weight:700;
+    color: gray;
+    text-align: right;
+    margin: 10px;
+    padding-top: 15px;
+}
+
+#customerbtn a {
+    color: white;
+    text-decoration: none;
+    background-color: rgb(152,189,24);
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    #customerbtn a:hover {
+        color: whitesmoke;
+    }
+
+/* Styles for navigation bar
+-----------------------------------------------------------*/
+#topnavbar {
+    color: white;
+    font-weight: 600;
+    background-color: dimgray;
+    margin-top: 40px;
+    line-height: 30px;
+    box-shadow: rgba(200,200,200,50) 0px 7px 5px;
+}
+ul#navmenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+    ul#navmenu li {
+        display: inline;
+        padding-right: 10px;
+        padding-left: 9px;
+        padding-top: 6px;
+        padding-bottom: 5px;
+        border-right: solid;
+        border-right-width: 2px;
+    }

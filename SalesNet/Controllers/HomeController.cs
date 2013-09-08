@@ -7,6 +7,7 @@ using SalesNet.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using SalesNet.Helpers;
 
 namespace SalesNet.Controllers
 {
@@ -30,9 +31,15 @@ namespace SalesNet.Controllers
                     model = (Persons)Serializer.Deserialize(ReadTask.Result);
                 });
             GetTask.Wait();
-            return View(model.person);
+            return View(model.PersonList);
         }
 
+        public ActionResult Orders()
+        {
+            Orders model = APIReader.GetOrders();
+            return View(model);
+        }
+        
         public ActionResult PickCustomer()
         {
             return View();

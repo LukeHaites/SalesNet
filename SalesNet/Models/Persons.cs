@@ -9,11 +9,11 @@ namespace SalesNet.Models
     public class Persons
     {
         [XmlElement("Person")]
-        public List<Person> person;
+        public List<Person> PersonList;
 
         public Persons()
         {
-            person = new List<Person>();
+            PersonList = new List<Person>();
         }
     }
 
@@ -29,16 +29,16 @@ namespace SalesNet.Models
         public string DateOfBirth { get; set; }
         public string StartDate { get; set; }
         public string JobTitle { get; set; }
-        private DateTime UpdateTimeStamp { get; set; }
+        private DateTime UpdateTimeStamp;
         public bool IsAgent { get; set; }
         public Addresses Addresses { get; set; }
         [XmlElement("Contacts")]
-        public List<Contacts> Contacts { get; set; }
-        public Currency Currency { get; set; }
+        public List<Contacts> ContactList { get; set; }
+        public CurrencyType Currency { get; set; }
 
         public Person()
         {
-            Contacts = new List<Contacts>();
+            ContactList = new List<Contacts>();
         }
 
         [XmlElement("UpdateTimeStamp")]
@@ -54,7 +54,7 @@ namespace SalesNet.Models
         [XmlElement("Billing")]
         public Address BillingAddress { get; set; }
         [XmlElement("Delivery")]
-        public Address deliveryAddress { get; set; }
+        public Address DeliveryAddress { get; set; }
     }
 
     public class Address
@@ -83,7 +83,7 @@ namespace SalesNet.Models
         public string Work { get; set; }
     }
 
-    public class Currency
+    public class CurrencyType
     {
         public string Code { get; set; }
         public string Format { get; set; }

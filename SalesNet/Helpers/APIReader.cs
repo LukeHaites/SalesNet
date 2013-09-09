@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using System.Net.Http;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace SalesNet.Helpers
 {
@@ -18,30 +19,35 @@ namespace SalesNet.Helpers
 
         public static Orders GetOrders()
         {
-            var XmlStreamTask = ReadXmlAsync();
-            XmlStreamTask.Wait();
-            return ParseOrders(XmlStreamTask.Result);
-        }
-
-        private static async Task<System.IO.Stream> ReadXmlAsync()
-        {
             string Url = string.Concat(BASE_URL, ENDPOINT, QUERYPARAMS);
-
-            try
-            {
-                var Client = new HttpClient();
-                System.IO.Stream UrlContents = await Client.GetStreamAsync(Url);
-            }
-            catch { }
-            return null;
-        }
-
-        private static Orders ParseOrders(System.IO.Stream XmlStream)
-        {
-            if (XmlStream == null) return null;
+            
+            Orders model = null;
 
             XmlSerializer Serializer = new XmlSerializer(typeof(Orders));
-            return (Orders)Serializer.Deserialize(XmlStream);
+
+            //If using file based
+            using (var reader = new StreamReader("c:\\temp\\orders.xml"))
+            {
+                model = (Orders)Serializer.Deserialize(reader);
+            }
+            return model;
+
+            ////If using Http based
+            //var Client = new HttpClient();
+            //var GetTask = Client.GetAsync(Url)
+            //    .ContinueWith((TaskWithResponse) =>
+            //    {
+            //        var Response = TaskWithResponse.Result;
+            //        var ReadTask = Response.Content.ReadAsStreamAsync();
+            //        ReadTask.Wait();
+            //        model = (Orders)Serializer.Deserialize(ReadTask.Result);
+            //    });
+            //GetTask.Wait();
+            //return model;
+                        
+            //var XmlStreamTask = ReadXmlAsync();
+            //XmlStreamTask.Wait();
+            //return ParseOrders(XmlStreamTask.Result);
         }
     }
 }

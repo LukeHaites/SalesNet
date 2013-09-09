@@ -37,7 +37,7 @@ namespace SalesNet.Controllers
         public ActionResult Orders()
         {
             Orders model = APIReader.GetOrders();
-            return View(model);
+            return View(model.OrderList);
         }
         
         public ActionResult PickCustomer()

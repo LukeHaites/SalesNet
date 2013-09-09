@@ -8,9 +8,13 @@ namespace SalesNet.Models
 {
     public class Orders
     {
+        [XmlAttribute("Type")]
         public string Type{ get; set; }
+        [XmlAttribute("TotalRows")]
         public string TotalRows{ get; set; }
+        [XmlAttribute("PageStartRow")]
         public string PageStartRow{ get; set; }
+        [XmlAttribute("PageRows")]
         public string PageRows{ get; set; }
         [XmlElement("Order")]
         public List<Order> OrderList{ get; set; }
@@ -26,28 +30,29 @@ namespace SalesNet.Models
         public string Id{ get; set; }
         public string RowNumber{ get; set; }
         public string TransNumber{ get; set; }
-        public string CustomerReference{ get; set; }
-        public string TransactionType{ get; set; }
-        public string DueDateFrom{ get; set; }
-        public string DueDateTo{ get; set; }
-        public string CreatedDate{ get; set; }
-        public string CustomerId{ get; set; }
-        public string CustomerCode{ get; set; }
-        public string CustomerName{ get; set; }
-        public string CarrierId{ get; set; }
-        public string CarrierCode{ get; set; }
-        public string CarrierName{ get; set; }
-        public string CarrierUrl{ get; set; }
-        public string ConNote{ get; set; }
-        public string OrderState{ get; set; }
-        public string DeliveryInstructions{ get; set; }
-        public string SpecialInstructions{ get; set; }
-        public string SupplyFromWarehouseId{ get; set; }
-        public string SupplyFromWarehouseCode{ get; set; }
-        public string SupplyFromWarehouseName{ get; set; }
-        public string CreditStatusFlag{ get; set; }
-        public string CreditStatus{ get; set; }
-        public string Lines{ get; set; }
+        public string CustomerReference { get; set; }
+        public string TransactionType { get; set; }
+        public string DueDateFrom { get; set; }
+        public string DueDateTo { get; set; }
+        public string CreatedDate { get; set; }
+        public string CustomerId { get; set; }
+        public string CustomerCode { get; set; }
+        public string CustomerName { get; set; }
+        public string CarrierId { get; set; }
+        public string CarrierCode { get; set; }
+        public string CarrierName { get; set; }
+        public string CarrierUrl { get; set; }
+        public string ConNote { get; set; }
+        public string OrderState { get; set; }
+        public string DeliveryInstructions { get; set; }
+        public string SpecialInstructions { get; set; }
+        public string SupplyFromWarehouseId { get; set; }
+        public string SupplyFromWarehouseCode { get; set; }
+        public string SupplyFromWarehouseName { get; set; }
+        public string CreditStatusFlag { get; set; }
+        public string CreditStatus { get; set; }
+        public string Lines { get; set; }
+        [XmlElement("Link")]
         public Link Link{ get; set; }
         //CurrencyType definition shared with Persons model
         public CurrencyType Currency{ get; set; }
@@ -57,18 +62,18 @@ namespace SalesNet.Models
         //Addresses definition shared with Persons model
         public Addresses Addresses{ get; set; }
         public OrderDetails OrderDetails{ get; set; }
-        public Invoices Invoices{ get; set; }
-        public FromOrders FromOrders{ get; set; }
+        //public Invoices Invoices{ get; set; }
+        //public FromOrders FromOrders{ get; set; }
     }
 
     public class TransactionValues
     {
-        public string Quantity{ get; set; }
-        public string Gross{ get; set; }
-        public string Discount{ get; set; }
-        public string Net{ get; set; }
-        public string Tax{ get; set; }
-        public string Value{ get; set; }
+        public int Quantity{ get; set; }
+        public float Gross{ get; set; }
+        public float Discount{ get; set; }
+        public float Net{ get; set; }
+        public float Tax{ get; set; }
+        public float Value{ get; set; }
     }
 
     public class OrderDetails
@@ -167,7 +172,9 @@ namespace SalesNet.Models
 
     public class Link
     {
+        [XmlAttribute("Rel")]
         public string Rel { get; set; }
+        [XmlText]
         public string Value { get; set; }
     }
 }

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SalesNet.Models.Order>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<img src="@Url.Content("~/content/images/promo_banner.jpg")" alt="Banner"/>
+
+<h2 class="pagetitle-round">Order History</h2>
+<div>
+    <div id="ordersearch">
+        <div class="green section-title">Order History Search</div>
+    </div>
+    <div id="orderhistory-box">
+        <table id="orderhistory-table">
+            <tr class="green">
+                <th>Status</th>
+                <th>@Html.DisplayNameFor(model => model.TransNumber)        </th>
+                <th>@Html.DisplayNameFor(model => model.CustomerReference)        </th>
+                <th>@Html.DisplayNameFor(model => model.DueDateFrom)        </th>
+                <th>@Html.DisplayNameFor(model => model.Lines)        </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>@Html.DisplayFor(modelItem => item.TransNumber)        </td>
+                    <td>@Html.DisplayFor(modelItem => item.CustomerReference)        </td>
+                    <td>@Html.DisplayFor(modelItem => item.DueDateFrom)        </td>
+                    <td>@Html.DisplayFor(modelItem => item.Lines)        </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

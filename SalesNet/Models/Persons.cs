@@ -59,7 +59,7 @@ namespace SalesNet.Models
 
     public class Address
     {
-        public int Id { get; set; }
+        //public int Id { get; set; } - this seems to mostly be sent through empty (and int can't be null)
         public string AddressType { get; set; }
         public string ContactName { get; set; }
         public string AddressLine1 { get; set; }

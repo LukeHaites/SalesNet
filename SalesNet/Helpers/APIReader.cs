@@ -15,7 +15,7 @@ namespace SalesNet.Helpers
     {
         private const string BASE_URL = "http://luke7/wholesaleapi/";
         private const string ENDPOINT = "orders";
-        private const string QUERYPARAMS = "?requestpersonid=101031&pageRows=2&startrow=1";
+        private const string QUERYPARAMS = "?requestpersonid=101031&pageRows=5&startrow=1";
 
         public static Orders GetOrders()
         {
@@ -26,28 +26,24 @@ namespace SalesNet.Helpers
             XmlSerializer Serializer = new XmlSerializer(typeof(Orders));
 
             //If using file based
-            using (var reader = new StreamReader("c:\\temp\\orders.xml"))
-            {
-                model = (Orders)Serializer.Deserialize(reader);
-            }
-            return model;
-
-            ////If using Http based
-            //var Client = new HttpClient();
-            //var GetTask = Client.GetAsync(Url)
-            //    .ContinueWith((TaskWithResponse) =>
-            //    {
-            //        var Response = TaskWithResponse.Result;
-            //        var ReadTask = Response.Content.ReadAsStreamAsync();
-            //        ReadTask.Wait();
-            //        model = (Orders)Serializer.Deserialize(ReadTask.Result);
-            //    });
-            //GetTask.Wait();
+            //using (var reader = new StreamReader("c:\\temp\\orders.xml"))
+            //{
+            //    model = (Orders)Serializer.Deserialize(reader);
+            //}
             //return model;
-                        
-            //var XmlStreamTask = ReadXmlAsync();
-            //XmlStreamTask.Wait();
-            //return ParseOrders(XmlStreamTask.Result);
+
+            //If using Http based
+            var Client = new HttpClient();
+            var GetTask = Client.GetAsync(Url)
+                .ContinueWith((TaskWithResponse) =>
+                {
+                    var Response = TaskWithResponse.Result;
+                    var ReadTask = Response.Content.ReadAsStreamAsync();
+                    ReadTask.Wait();
+                    model = (Orders)Serializer.Deserialize(ReadTask.Result);
+                });
+            GetTask.Wait();
+            return model;
         }
     }
 }

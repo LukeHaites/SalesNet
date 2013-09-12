@@ -14,16 +14,16 @@
         {
             <fieldset>
                 <legend></legend>
-                @Html.Label("Product Code & Description")
-                @Html.TextBox("ProductFilter")
+                @Html.Label("Product Code / Description")
+                @Html.TextBox("ProductFilter", null, new { placeholder = "Code / Description" })
                 @Html.Label("Transaction #")
-                @Html.TextBox("TransNumber")
+                @Html.TextBox("TransNumber", null, new { placeholder = "Trans. #" })
                 @Html.Label("Reference #")
-                @Html.TextBox("CustRef")
+                @Html.TextBox("CustRef", null, new { placeholder = "Reference" })
                 @Html.Label("Created From")
-                @Html.TextBox("CreatedDateFrom")
+                @Html.TextBox("CreatedDateFrom", null, new { placeholder = "Created Date From" })
                 @Html.Label("Created To")
-                @Html.TextBox("CreatedDateTo")
+                @Html.TextBox("CreatedDateTo", null, new { placeholder = "Created Date To" })
                 <input type="submit" Value="Search" />
             </fieldset>
         }
@@ -31,24 +31,27 @@
     <div id="orderhistory-box">
         <table id="orderhistory-table">
             <tr class="green">
-                <th>Status</th>
-                <th>@Html.DisplayNameFor(model => model.TransNumber)        </th>
-                <th>@Html.DisplayNameFor(model => model.CustomerReference)        </th>
-                <th>@Html.DisplayNameFor(model => model.DueDateFrom)        </th>
-                <th>@Html.DisplayNameFor(model => model.Lines)        </th>
+                <th style="text-align: left">Status</th>
+                <th style="text-align: left">Trans. #</th>
+                <th style="text-align: left">Reference</th>
+                <th style="text-align: center">Created Date</th>
+                <th style="text-align: right">Lines</th>
+                <th style="text-align: right">Qty</th>
+                <th style="text-align: right">Total (inc Tax)</th>
             </tr>
 
             @foreach (var item in Model)
             {
                 <tr>
                     <td></td>
-                    <td>@Html.DisplayFor(modelItem => item.TransNumber)        </td>
-                    <td>@Html.DisplayFor(modelItem => item.CustomerReference)        </td>
-                    <td>@Html.DisplayFor(modelItem => item.DueDateFrom)        </td>
-                    <td>@Html.DisplayFor(modelItem => item.Lines)        </td>
+                    <td style="text-align: left">@Html.DisplayFor(modelItem => item.TransNumber)</td>
+                    <td style="text-align: left">@Html.DisplayFor(modelItem => item.CustomerReference)</td>
+                    <td style="text-align: center">@Html.DisplayFor(modelItem => item.DueDateFrom)</td>
+                    <td style="text-align: right">@Html.DisplayFor(modelItem => item.Lines)</td>
+                    <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Quantity)</td>
+                    <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Net)</td>
                 </tr>
             }
-
         </table>
     </div>
 </div>

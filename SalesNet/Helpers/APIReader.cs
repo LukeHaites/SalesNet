@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
 using System.IO;
+using System.Reflection;
 
 namespace SalesNet.Helpers
 {
@@ -17,9 +18,16 @@ namespace SalesNet.Helpers
         private const string ENDPOINT = "orders";
         private const string QUERYPARAMS = "?requestpersonid=101031&pageRows=5&startrow=1";
 
-        public static Orders GetOrders()
+        public static Orders GetOrders(TransFilter Filter)
         {
-            string Url = string.Concat(BASE_URL, ENDPOINT, QUERYPARAMS);
+            string FilterString = "";
+
+            foreach (PropertyInfo prop in typeof(TransFilter).GetProperties())
+            {
+                FilterString = (prop.GetValue(Filter) != null) ? FilterString + "&" + prop.Name + "=" + prop.GetValue(Filter) : FilterString;
+            }
+
+            string Url = string.Concat(BASE_URL, ENDPOINT, QUERYPARAMS, FilterString);
             
             Orders model = null;
 

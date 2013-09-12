@@ -10,6 +10,23 @@
 <div>
     <div id="ordersearch">
         <div class="green section-title bar">Order History Search</div>
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <legend></legend>
+                @Html.Label("Product Code & Description")
+                @Html.TextBox("ProductFilter")
+                @Html.Label("Transaction #")
+                @Html.TextBox("TransNumber")
+                @Html.Label("Reference #")
+                @Html.TextBox("CustRef")
+                @Html.Label("Created From")
+                @Html.TextBox("CreatedDateFrom")
+                @Html.Label("Created To")
+                @Html.TextBox("CreatedDateTo")
+                <input type="submit" Value="Search" />
+            </fieldset>
+        }
     </div>
     <div id="orderhistory-box">
         <table id="orderhistory-table">

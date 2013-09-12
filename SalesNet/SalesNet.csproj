@@ -146,6 +146,7 @@
     <Compile Include="Helpers\APIReader.cs" />
     <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\Persons.cs" />
+    <Compile Include="Models\TransSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

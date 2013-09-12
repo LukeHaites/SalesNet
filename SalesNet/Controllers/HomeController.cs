@@ -34,9 +34,18 @@ namespace SalesNet.Controllers
             return View(model.PersonList);
         }
 
+        [HttpGet]
         public ActionResult Orders()
         {
-            Orders model = APIReader.GetOrders();
+            TransFilter Filter = new TransFilter();
+            Orders model = APIReader.GetOrders(Filter);
+            return View(model.OrderList);
+        }
+
+        [HttpPost]
+        public ActionResult Orders(TransFilter Filter)
+        {
+            Orders model = APIReader.GetOrders(Filter);
             return View(model.OrderList);
         }
         

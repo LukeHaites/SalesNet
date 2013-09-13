@@ -13,6 +13,7 @@ namespace SalesNet.Controllers
 {
     public class HomeController : Controller
     {
+        private int FetchRows = 10;
         //
         // GET: /Home/
 
@@ -38,14 +39,14 @@ namespace SalesNet.Controllers
         public ActionResult Orders()
         {
             TransFilter Filter = new TransFilter();
-            Orders model = APIReader.GetOrders(Filter);
+            Orders model = APIReader.GetOrders(Filter, FetchRows, 1);
             return View(model.OrderList);
         }
 
         [HttpPost]
         public ActionResult Orders(TransFilter Filter)
         {
-            Orders model = APIReader.GetOrders(Filter);
+            Orders model = APIReader.GetOrders(Filter, FetchRows, 1);
             return View(model.OrderList);
         }
         

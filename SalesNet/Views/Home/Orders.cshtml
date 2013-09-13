@@ -4,6 +4,14 @@
     ViewBag.Title = "Orders";
 }
 
+@section scripts {
+    <script>
+        $(function () {
+            $("#tabs").tabs();
+        });
+    </script>
+}
+
 <img class="center" src="@Url.Content("~/content/images/promo_banner.jpg")" alt="Banner"/>
 
 <h2 class="lightgrey page-title round bar">Order History</h2>
@@ -24,34 +32,90 @@
                 @Html.TextBox("CreatedDateFrom", null, new { placeholder = "Created Date From" })
                 @Html.Label("Created To")
                 @Html.TextBox("CreatedDateTo", null, new { placeholder = "Created Date To" })
-                <input type="submit" Value="Search" />
+                <input type="submit" value="Search" />
             </fieldset>
         }
     </div>
     <div id="orderhistory-box">
-        <table id="orderhistory-table">
-            <tr class="green">
-                <th style="text-align: left">Status</th>
-                <th style="text-align: left">Trans. #</th>
-                <th style="text-align: left">Reference</th>
-                <th style="text-align: center">Created Date</th>
-                <th style="text-align: right">Lines</th>
-                <th style="text-align: right">Qty</th>
-                <th style="text-align: right">Total (inc Tax)</th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td></td>
-                    <td style="text-align: left">@Html.DisplayFor(modelItem => item.TransNumber)</td>
-                    <td style="text-align: left">@Html.DisplayFor(modelItem => item.CustomerReference)</td>
-                    <td style="text-align: center">@Html.DisplayFor(modelItem => item.DueDateFrom)</td>
-                    <td style="text-align: right">@Html.DisplayFor(modelItem => item.Lines)</td>
-                    <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Quantity)</td>
-                    <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Net)</td>
-                </tr>
-            }
-        </table>
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Orders</a></li>
+                <li><a href="#tabs-2">Invoices</a></li>
+                <li><a href="#tabs-3">Credit Notes</a></li>
+            </ul>
+            <div id="tabs-1">
+                <table id="orderhistory-table">
+                    <thead>
+                        <tr class="green">
+                            <th></th>
+                            <th style="text-align: left">Status</th>
+                            <th style="text-align: left">Trans. #</th>
+                            <th style="text-align: left">Reference</th>
+                            <th style="text-align: center">Created Date</th>
+                            <th style="text-align: right">Lines</th>
+                            <th style="text-align: right">Qty</th>
+                            <th></th>
+                            <th style="text-align: right">Total (inc Tax)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: left">@Html.DisplayFor(modelItem => item.TransNumber)</td>
+                                <td style="text-align: left">@Html.DisplayFor(modelItem => item.CustomerReference)</td>
+                                <td style="text-align: center">@Html.DisplayFor(modelItem => item.DueDateFrom)</td>
+                                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Lines)</td>
+                                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Quantity)</td>
+                                <td></td>
+                                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Value)</td>
+                            </tr>
+                            <tr style="vertical-align: top">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <strong>Deliver To</strong><br />
+                                    @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.AddressLine1)<br />
+                                    @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.AddressLine2)<br />
+                                    @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.City)<br />
+                                    @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.State)<br />
+                                    @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.Postcode)
+                                </td>
+                                <td style="text-align: center">
+                                    <strong>Due Date</strong><br />
+                                    @Html.DisplayFor(modelItem => item.DueDateFrom)
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <strong>Gross:<br />
+                                        Discount:<br />
+                                        Tax:<br />
+                                        Due:
+                                    </strong>
+                                </td>
+                                <td style="text-align: right">
+                                    @Html.DisplayFor(modelItem => item.Ordered.Gross)<br />
+                                    @Html.DisplayFor(modelItem => item.Ordered.Discount)<br />
+                                    @Html.DisplayFor(modelItem => item.Ordered.Tax)<br />
+                                    @Html.DisplayFor(modelItem => item.Ordered.Value)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div id="tabs-2">
+                <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+            </div>
+            <div id="tabs-3">
+                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+            </div>
+        </div>
     </div>
 </div>

@@ -16,11 +16,13 @@ namespace SalesNet.Helpers
     {
         private const string BASE_URL = "http://luke7/wholesaleapi/";
         private const string ENDPOINT = "orders";
-        private const string QUERYPARAMS = "?requestpersonid=101031&pageRows=5&startrow=1";
+        private const string QUERYPARAMS = "?requestpersonid=101031";
 
-        public static Orders GetOrders(TransFilter Filter)
+        public static Orders GetOrders(TransFilter Filter, int FetchRows, int FetchFrom)
         {
-            string FilterString = "";
+            string FilterString = "&pageRows=" + FetchRows + "&startrow=" + FetchFrom;
+            Orders model = null;
+            XmlSerializer Serializer = new XmlSerializer(typeof(Orders));
 
             foreach (PropertyInfo prop in typeof(TransFilter).GetProperties())
             {
@@ -29,10 +31,6 @@ namespace SalesNet.Helpers
 
             string Url = string.Concat(BASE_URL, ENDPOINT, QUERYPARAMS, FilterString);
             
-            Orders model = null;
-
-            XmlSerializer Serializer = new XmlSerializer(typeof(Orders));
-
             //If using file based
             //using (var reader = new StreamReader("c:\\temp\\orders.xml"))
             //{

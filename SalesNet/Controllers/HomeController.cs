@@ -35,21 +35,18 @@ namespace SalesNet.Controllers
             return View(model.PersonList);
         }
 
-        [HttpGet]
-        public ActionResult Orders()
-        {
-            TransFilter Filter = new TransFilter();
-            Orders model = APIReader.GetOrders(Filter, FetchRows, 1);
-            return View(model.OrderList);
-        }
-
-        [HttpPost]
         public ActionResult Orders(TransFilter Filter)
         {
             Orders model = APIReader.GetOrders(Filter, FetchRows, 1);
+            
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("OrdersTable", model.OrderList);
+            }
+
             return View(model.OrderList);
         }
-        
+
         public ActionResult PickCustomer()
         {
             return View();

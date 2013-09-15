@@ -233,10 +233,22 @@ ul#navmenu {
             padding-bottom: 10px;
         }
 
-        #orderhistory-table tr td {
-            border-top-style: dotted;
-            border-width: 1px;
-            border-color: lightgray;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
+.orderhistory-summary td {
+    border-top-style: dotted;
+    border-width: 1px;
+    border-color: lightgray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.orderhistory-detail {
+    vertical-align: top;
+}
+
+    .orderhistory-detail td {
+        padding: 0px;
+    }
+
+.hidden {
+    display: none;
+}

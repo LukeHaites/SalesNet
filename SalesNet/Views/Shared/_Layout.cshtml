@@ -7,7 +7,12 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
-</head>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)</head>
+    <script src="~/Scripts/site.js"></script>
+
 <body>
     <header>
         <div id="logo">
@@ -21,14 +26,14 @@
                 <li>Change Customer</li>
             </ul>
             <div id="customer">
-                Customer: <span id="btn-large">@Html.ActionLink("General Pants","PickCustomer")</span>
+                Customer: <span id="btn-large">@Html.ActionLink("General Pants", "PickCustomer")</span>
             </div>
         </div>
     </header>
-    <p style="clear:both"></p>
+    <p style="clear: both"></p>
     <nav id="topnavbar">
         <ul id="navmenu">
-            <li>@Html.ActionLink("Order History","Orders")</li>
+            <li>@Html.ActionLink("Order History", "Orders")</li>
             <li>Stock Order</li>
             <li>Indent Order</li>
         </ul>
@@ -36,8 +41,5 @@
 
     @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<SalesNet.Models.Order>
+
+<table id="orderhistory-table">
+    <thead>
+        <tr class="green">
+            <th></th>
+            <th style="text-align: left">Status</th>
+            <th style="text-align: left">Trans. #</th>
+            <th style="text-align: left">Reference</th>
+            <th style="text-align: center">Created Date</th>
+            <th style="text-align: right">Lines</th>
+            <th style="text-align: right">Qty</th>
+            <th></th>
+            <th style="text-align: right">Total (inc Tax)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                
+            <tr class="orderhistory-summary">
+                <td>
+                    <button class="showdets">Details</button></td>
+                <td></td>
+                <td style="text-align: left">@Html.DisplayFor(modelItem => item.TransNumber)</td>
+                <td style="text-align: left">@Html.DisplayFor(modelItem => item.CustomerReference)</td>
+                <td style="text-align: center">@Html.DisplayFor(modelItem => item.DueDateFrom)</td>
+                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Lines)</td>
+                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Quantity)</td>
+                <td></td>
+                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Value)</td>
+            </tr>
+            <tr class="orderhistory-detail">
+                <td>
+                    <div class="hidden">
+                        <button class="hidedets">Hide</button>
+                    </div>
+                </td>
+                <td>
+                    <div class="hidden"></div>
+                </td>
+                <td>
+                    <div class="hidden"></div>
+                </td>
+                <td>
+                    <div class="hidden">
+                        <strong>Deliver To</strong><br />
+                        @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.AddressLine1)<br />
+                        @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.AddressLine2)<br />
+                        @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.City)<br />
+                        @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.State)<br />
+                        @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.Postcode)
+                    </div>
+                </td>
+                <td style="text-align: center">
+                    <div class="hidden">
+                        <strong>Due Date</strong><br />
+                        @Html.DisplayFor(modelItem => item.DueDateFrom)
+                    </div>
+                </td>
+                <td>
+                    <div class="hidden"></div>
+                </td>
+                <td>
+                    <div class="hidden"></div>
+                </td>
+                <td>
+                    <div class="hidden">
+                        <strong>Gross:<br />
+                            Discount:<br />
+                            Tax:<br />
+                            Due:
+                        </strong>
+                    </div>
+                </td>
+                <td style="text-align: right">
+                    <div class="hidden">
+                        @Html.DisplayFor(modelItem => item.Ordered.Gross)<br />
+                        @Html.DisplayFor(modelItem => item.Ordered.Discount)<br />
+                        @Html.DisplayFor(modelItem => item.Ordered.Tax)<br />
+                        @Html.DisplayFor(modelItem => item.Ordered.Value)
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -18,26 +18,19 @@ namespace SalesNet.Helpers
         private const string ENDPOINT = "orders";
         private const string QUERYPARAMS = "?requestpersonid=101031";
 
-        public static Orders GetOrders(OrderPageData Filter)
+        public static IEnumerable<Order> GetOrders(OrderFilters Filter)
         {
             string FilterString = "&pageRows=" + Filter.PageRows + "&startrow=" + Filter.StartRow;
             Orders model = null;
             XmlSerializer Serializer = new XmlSerializer(typeof(Orders));
 
-            foreach (PropertyInfo prop in typeof(OrderPageData).GetProperties())
+            foreach (PropertyInfo prop in typeof(OrderFilters).GetProperties())
             {
                 FilterString = (Attribute.IsDefined(prop, typeof(FilterField)) && prop.GetValue(Filter) != null) ? FilterString + "&" + prop.Name + "=" + prop.GetValue(Filter) : FilterString;
             }
 
             string Url = string.Concat(BASE_URL, ENDPOINT, QUERYPARAMS, FilterString);
             
-            //If using file based
-            //using (var reader = new StreamReader("c:\\temp\\orders.xml"))
-            //{
-            //    model = (Orders)Serializer.Deserialize(reader);
-            //}
-            //return model;
-
             //If using Http based
             var Client = new HttpClient();
             var GetTask = Client.GetAsync(Url)
@@ -49,7 +42,7 @@ namespace SalesNet.Helpers
                     model = (Orders)Serializer.Deserialize(ReadTask.Result);
                 });
             GetTask.Wait();
-            return model;
+            return model.OrderList;
         }
     }
 }

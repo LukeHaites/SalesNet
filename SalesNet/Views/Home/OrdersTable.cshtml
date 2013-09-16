@@ -1,4 +1,27 @@
-﻿@model IEnumerable<SalesNet.Models.Order>
+﻿@model SalesNet.Models.OrderPageData
+
+<div id="tabs">
+    <ul>
+        <li>
+            @{
+                Model.Filters.TransType = "Orders";
+            }
+            @Ajax.ActionLink("Orders", "Orders", Model.Filters, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
+        </li>
+        <li>
+            @{
+                Model.Filters.TransType = "Invoices";
+            }
+            @Ajax.ActionLink("Invoices", "Orders", Model.Filters, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
+        </li>
+        <li>
+            @{
+                Model.Filters.TransType = "Credits";
+            }
+            @Ajax.ActionLink("Credits", "Orders", Model.Filters, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
+        </li>
+    </ul>
+</div>
 
 <table id="orderhistory-table">
     <thead>
@@ -15,9 +38,8 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Orders)
         {
-                
             <tr class="orderhistory-summary">
                 <td>
                     <button class="showdets">Details</button></td>

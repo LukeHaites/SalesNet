@@ -13,7 +13,6 @@ namespace SalesNet.Controllers
 {
     public class HomeController : Controller
     {
-        private int FetchRows = 10;
         //
         // GET: /Home/
 
@@ -35,20 +34,23 @@ namespace SalesNet.Controllers
             return View(model.PersonList);
         }
 
-        //public ActionResult Orders(TransFilter Filter)
-        public ActionResult Orders(OrderPageData PageData)
+        //
+        // GET: /Orders/
+
+        public ActionResult Orders(OrderFilters Filters)
         {
-            PageData.StartRow = 1;
-            PageData.PageRows = FetchRows;
-            Orders model = APIReader.GetOrders(PageData);
-            PageData.OrderList = model.OrderList;
+            Filters.StartRow = 1;
+            Filters.PageRows = 10;
+            OrderPageData PageData = new OrderPageData();
+            PageData.Orders = APIReader.GetOrders(Filters);
+            PageData.Filters = Filters;
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("OrdersTable", model.OrderList);
+                return PartialView("OrdersTable", PageData);
             }
 
-            return View(model.OrderList);
+            return View(PageData);
         }
 
         public ActionResult PickCustomer()

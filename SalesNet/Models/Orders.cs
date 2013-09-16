@@ -8,13 +8,9 @@ namespace SalesNet.Models
 {
     public class Orders
     {
-        [XmlAttribute("Type")]
         public string Type { get; set; }
-        [XmlAttribute("TotalRows")]
         public string TotalRows { get; set; }
-        [XmlAttribute("PageStartRow")]
         public string PageStartRow { get; set; }
-        [XmlAttribute("PageRows")]
         public string PageRows { get; set; }
         [XmlElement("Order")]
         public List<Order> OrderList { get; set; }
@@ -179,7 +175,7 @@ namespace SalesNet.Models
         public string Value { get; set; }
     }
 
-    public class OrderPageData
+    public class OrderFilters
     {
         public int Id { get; set; }
         public int RequestPersonId { get; set; }
@@ -202,6 +198,11 @@ namespace SalesNet.Models
         public string TransType { get; set; }
         public int StartRow { get; set; }
         public int PageRows { get; set; }
-        public IEnumerable<Order> OrderList { get; set; }
+    }
+
+    public class OrderPageData
+    {
+        public OrderFilters Filters { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

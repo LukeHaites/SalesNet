@@ -18,15 +18,15 @@ namespace SalesNet.Helpers
         private const string ENDPOINT = "orders";
         private const string QUERYPARAMS = "?requestpersonid=101031";
 
-        public static Orders GetOrders(TransFilter Filter, int FetchRows, int FetchFrom)
+        public static Orders GetOrders(OrderPageData Filter)
         {
-            string FilterString = "&pageRows=" + FetchRows + "&startrow=" + FetchFrom;
+            string FilterString = "&pageRows=" + Filter.PageRows + "&startrow=" + Filter.StartRow;
             Orders model = null;
             XmlSerializer Serializer = new XmlSerializer(typeof(Orders));
 
-            foreach (PropertyInfo prop in typeof(TransFilter).GetProperties())
+            foreach (PropertyInfo prop in typeof(OrderPageData).GetProperties())
             {
-                FilterString = (prop.GetValue(Filter) != null) ? FilterString + "&" + prop.Name + "=" + prop.GetValue(Filter) : FilterString;
+                FilterString = (Attribute.IsDefined(prop, typeof(FilterField)) && prop.GetValue(Filter) != null) ? FilterString + "&" + prop.Name + "=" + prop.GetValue(Filter) : FilterString;
             }
 
             string Url = string.Concat(BASE_URL, ENDPOINT, QUERYPARAMS, FilterString);

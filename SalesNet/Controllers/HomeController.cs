@@ -39,9 +39,12 @@ namespace SalesNet.Controllers
 
         public ActionResult Orders(OrderFilters Filters)
         {
-            Filters.StartRow = 1;
-            Filters.PageRows = 10;
             OrderPageData PageData = new OrderPageData();
+            
+            Filters.StartRow = (Filters.StartRow == 0) ? 1 : Filters.StartRow;
+            Filters.PageRows = (Filters.PageRows == 0) ? 10 : Filters.PageRows;
+            Filters.TransType = Filters.TransType ?? "Orders";
+            
             PageData.Orders = APIReader.GetOrders(Filters);
             PageData.Filters = Filters;
 

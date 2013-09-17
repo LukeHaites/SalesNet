@@ -18,7 +18,7 @@ namespace SalesNet.Helpers
         private const string ENDPOINT = "orders";
         private const string QUERYPARAMS = "?requestpersonid=101031";
 
-        public static IEnumerable<Order> GetOrders(OrderFilters Filter)
+        public static Orders GetOrders(OrderFilters Filter)
         {
             string FilterString = "&pageRows=" + Filter.PageRows + "&startrow=" + Filter.StartRow;
             Orders model = null;
@@ -42,7 +42,7 @@ namespace SalesNet.Helpers
                     model = (Orders)Serializer.Deserialize(ReadTask.Result);
                 });
             GetTask.Wait();
-            return model.OrderList;
+            return model;
         }
     }
 }

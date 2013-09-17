@@ -3,22 +3,52 @@
 <div id="tabs">
     <ul>
         <li>
-            @{
-                Model.Filters.TransType = "Orders";
-            }
-            @Ajax.ActionLink("Orders", "Orders", Model.Filters, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
+            @Ajax.ActionLink("Orders",
+                             "Orders",
+                             new SalesNet.Models.OrderFilters
+                             {
+                                 ProductFilter = Model.Filters.ProductFilter,
+                                 TransNumber = Model.Filters.TransNumber,
+                                 CustRef = Model.Filters.CustRef,
+                                 CreatedDateFrom = Model.Filters.CreatedDateFrom,
+                                 CreatedDateTo = Model.Filters.CreatedDateTo,
+                                 PageRows = Model.Filters.PageRows,
+                                 StartRow = Model.Filters.StartRow,
+                                 TransType = "Orders"
+                             },
+                             new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
         </li>
         <li>
-            @{
-                Model.Filters.TransType = "Invoices";
-            }
-            @Ajax.ActionLink("Invoices", "Orders", Model.Filters, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
+            @Ajax.ActionLink("Invoices",
+                             "Orders",
+                             new SalesNet.Models.OrderFilters
+                             {
+                                 ProductFilter = Model.Filters.ProductFilter,
+                                 TransNumber = Model.Filters.TransNumber,
+                                 CustRef = Model.Filters.CustRef,
+                                 CreatedDateFrom = Model.Filters.CreatedDateFrom,
+                                 CreatedDateTo = Model.Filters.CreatedDateTo,
+                                 PageRows = Model.Filters.PageRows,
+                                 StartRow = Model.Filters.StartRow,
+                                 TransType = "Invoices"
+                             },
+                             new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
         </li>
         <li>
-            @{
-                Model.Filters.TransType = "Credits";
-            }
-            @Ajax.ActionLink("Credits", "Orders", Model.Filters, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
+            @Ajax.ActionLink("Credits",
+                             "Orders",
+                             new SalesNet.Models.OrderFilters
+                             {
+                                 ProductFilter = Model.Filters.ProductFilter,
+                                 TransNumber = Model.Filters.TransNumber,
+                                 CustRef = Model.Filters.CustRef,
+                                 CreatedDateFrom = Model.Filters.CreatedDateFrom,
+                                 CreatedDateTo = Model.Filters.CreatedDateTo,
+                                 PageRows = Model.Filters.PageRows,
+                                 StartRow = Model.Filters.StartRow,
+                                 TransType = "Credits"
+                             },
+                             new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
         </li>
     </ul>
 </div>
@@ -38,7 +68,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Orders)
+        @foreach (var item in Model.Orders.OrderList)
         {
             <tr class="orderhistory-summary">
                 <td>
@@ -107,5 +137,37 @@
         }
     </tbody>
 </table>
+<div>
+    @Ajax.ActionLink("Prev",
+                     "Orders",
+                     new SalesNet.Models.OrderFilters
+                     {
+                         ProductFilter = Model.Filters.ProductFilter,
+                         TransNumber = Model.Filters.TransNumber,
+                         CustRef = Model.Filters.CustRef,
+                         CreatedDateFrom = Model.Filters.CreatedDateFrom,
+                         CreatedDateTo = Model.Filters.CreatedDateTo,
+                         PageRows = Model.Filters.PageRows,
+                         StartRow = (Model.Filters.StartRow > 10) ? Model.Filters.StartRow - 10 : 1,
+                         TransType = Model.Filters.TransType
+                     },
+                     new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })
+</div>
+<div>
+    @Ajax.ActionLink("Next",
+                     "Orders",
+                     new SalesNet.Models.OrderFilters
+                     {
+                         ProductFilter = Model.Filters.ProductFilter,
+                         TransNumber = Model.Filters.TransNumber,
+                         CustRef = Model.Filters.CustRef,
+                         CreatedDateFrom = Model.Filters.CreatedDateFrom,
+                         CreatedDateTo = Model.Filters.CreatedDateTo,
+                         PageRows = Model.Filters.PageRows,
+                         StartRow = (Model.Filters.StartRow + 10 <= Model.Orders.TotalRows) ? Model.Filters.StartRow + 10 : Model.Filters.StartRow,
+                         TransType = Model.Filters.TransType
+                     },
+                     new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "orderhistory-box" })           
+</div>
 
 

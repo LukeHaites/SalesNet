@@ -8,10 +8,14 @@ namespace SalesNet.Models
 {
     public class Orders
     {
+        [XmlAttribute("Type")]
         public string Type { get; set; }
-        public string TotalRows { get; set; }
-        public string PageStartRow { get; set; }
-        public string PageRows { get; set; }
+        [XmlAttribute("TotalRows")]
+        public int TotalRows { get; set; }
+        [XmlAttribute("PageStartRow")]
+        public int PageStartRow { get; set; }
+        [XmlAttribute("PageRows")]
+        public int PageRows { get; set; }
         [XmlElement("Order")]
         public List<Order> OrderList { get; set; }
 
@@ -74,7 +78,9 @@ namespace SalesNet.Models
 
     public class OrderDetails
     {
+        [XmlAttribute("Type")]
         public string Type { get; set; }
+        [XmlAttribute("TotalRows")]
         public string TotalRows { get; set; }
         [XmlElement("OrderDetail")]
         public List<Product> ProductList { get; set; }
@@ -103,7 +109,9 @@ namespace SalesNet.Models
     {
         [XmlElement("Clr")]
         public List<Clr> ClrList { get; set; }
+        [XmlAttribute("Type")]
         public string Type { get; set; }
+        [XmlAttribute("TotalRows")]
         public string TotalRows { get; set; }
 
         public Clrs()
@@ -134,7 +142,9 @@ namespace SalesNet.Models
     {
         [XmlElement("SKU")]
         public List<SKU> SKUList { get; set; }
+        [XmlAttribute("Type")]
         public string Type { get; set; }
+        [XmlAttribute("TotalRows")]
         public string TotalRows { get; set; }
 
         public SKUs()
@@ -203,6 +213,6 @@ namespace SalesNet.Models
     public class OrderPageData
     {
         public OrderFilters Filters { get; set; }
-        public IEnumerable<Order> Orders { get; set; }
+        public Orders Orders { get; set; }
     }
 }

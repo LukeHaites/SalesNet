@@ -55,16 +55,16 @@
 
 <table id="orderhistory-table">
     <thead>
-        <tr class="green">
-            <th></th>
-            <th style="text-align: left">Status</th>
-            <th style="text-align: left">Trans. #</th>
-            <th style="text-align: left">Reference</th>
-            <th style="text-align: center">Created Date</th>
-            <th style="text-align: right">Lines</th>
-            <th style="text-align: right">Qty</th>
-            <th></th>
-            <th style="text-align: right">Total (inc Tax)</th>
+        <tr class="green" id="orderhistory-tablehdr">
+            <th id="orderhistory-showdetscol"></th>
+            <th class="textleft" id="orderhistory-statuscol">Status</th>
+            <th class="textleft" id="orderhistory-transnumcol">Trans. #</th>
+            <th class="textleft" id="orderhistory-refcol">Reference</th>
+            <th class="textcenter" id="orderhistory-createdcol">Created Date</th>
+            <th class="textright" id="orderhistory-linescol">Lines</th>
+            <th class="textright" id="orderhistory-qtycol">Qty</th>
+            <th id="orderhistory-detslabelcol"></th>
+            <th class="textright" id="orderhistory-totalcol">Total (inc Tax)</th>
         </tr>
     </thead>
     <tbody>
@@ -72,21 +72,19 @@
         {
             <tr class="orderhistory-summary">
                 <td>
-                    <button class="showdets">Details</button></td>
+                    <a class="showdets jquery-ui-icon arrowdn">D</a></td>
                 <td></td>
-                <td style="text-align: left">@Html.DisplayFor(modelItem => item.TransNumber)</td>
-                <td style="text-align: left">@Html.DisplayFor(modelItem => item.CustomerReference)</td>
-                <td style="text-align: center">@Html.DisplayFor(modelItem => item.DueDateFrom)</td>
-                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Lines)</td>
-                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Quantity)</td>
+                <td class="textleft">@Html.DisplayFor(modelItem => item.TransNumber)</td>
+                <td class="textleft">@Html.DisplayFor(modelItem => item.CustomerReference)</td>
+                <td class="textcenter">@Html.DisplayFor(modelItem => item.DueDateFrom)</td>
+                <td class="textright">@Html.DisplayFor(modelItem => item.Lines)</td>
+                <td class="textright">@Html.DisplayFor(modelItem => item.Ordered.Quantity)</td>
                 <td></td>
-                <td style="text-align: right">@Html.DisplayFor(modelItem => item.Ordered.Value)</td>
+                <td class="textright">@Html.DisplayFor(modelItem => item.Ordered.Value)</td>
             </tr>
             <tr class="orderhistory-detail">
                 <td>
-                    <div class="hidden">
-                        <button class="hidedets">Hide</button>
-                    </div>
+                    <div class="hidden"></div>
                 </td>
                 <td>
                     <div class="hidden"></div>
@@ -104,7 +102,7 @@
                         @Html.DisplayFor(modelItem => item.Addresses.DeliveryAddress.Postcode)
                     </div>
                 </td>
-                <td style="text-align: center">
+                <td class="textcenter">
                     <div class="hidden">
                         <strong>Due Date</strong><br />
                         @Html.DisplayFor(modelItem => item.DueDateFrom)
@@ -125,7 +123,7 @@
                         </strong>
                     </div>
                 </td>
-                <td style="text-align: right">
+                <td class="textright">
                     <div class="hidden">
                         @Html.DisplayFor(modelItem => item.Ordered.Gross)<br />
                         @Html.DisplayFor(modelItem => item.Ordered.Discount)<br />
